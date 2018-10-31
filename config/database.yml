@@ -97,10 +97,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: roster_development
+  # <<: *default
+  database: roster_db
   username: pguser
   password: admin
   #url: <%= ENV['DATABASE_URL'] %>
-  # host: ''
+  host: localhost
   # password: <%= ENV['ROSTER_DATABASE_PASSWORD'] %>
