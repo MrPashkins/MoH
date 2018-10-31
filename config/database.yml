@@ -24,6 +24,15 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+# development:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: my_db_name
+#   username: root
+#   password: my_password
+#   host: 127.0.0.1
+#   port: 3306
+
 development:
   <<: *default
   database: roster_development

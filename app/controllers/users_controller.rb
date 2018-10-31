@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     #@users = User.all
+    #@users = User.where(activated: true).paginate(page: params[:page])
     @users = User.paginate(page: params[:page])
   end
 
@@ -15,6 +16,8 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @user = User.find(params[:id])
+    # might be a mistake to put next line
+    redirect_to root_url and return unless @user.activated?
   end
 
   # GET /users/new
@@ -34,10 +37,13 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        log_in @user
-        flash[:success] = "Welcome to the Register!"
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        @user.send_activation_email
+        flash[:info] = "Будь ласка перевірте email."
+        redirect_to root_url
+        # log_in @user
+        # flash[:success] = "Welcome to the Register!"
+        # format.html { redirect_to @user, notice: 'User was successfully created.' }
+        # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }

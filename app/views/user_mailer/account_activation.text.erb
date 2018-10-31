@@ -1,0 +1,5 @@
+Доброго дня <%= @user.name %>,
+
+Ласкаво просимо до Реєстру перших реагувальників. Перейдіть по посилання для підтвердження реєстрації:
+
+<%= edit_account_activation_url(@user.activation_token, email: @user.email) %>
