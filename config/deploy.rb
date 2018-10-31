@@ -1,11 +1,12 @@
 # Change these
 server '94.131.241.58', port: 22, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'github.com/MrPashkins/MoH.git'
+set :repo_url,        'git@github.com:MrPashkins/MoH.git'
 set :application,     'roster'
 set :user,            'pasha'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
+# set :rvm_map_bins
 
 # Don't change these unless you know what you're doing
 set :pty,             true

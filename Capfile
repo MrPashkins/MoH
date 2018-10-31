@@ -12,8 +12,8 @@ require 'capistrano/deploy'
 # require "capistrano/scm/svn"
 # install_plugin Capistrano::SCM::Svn
 # or
-# require "capistrano/scm/git"
-# install_plugin Capistrano::SCM::Git
+require "capistrano/scm/git"
+install_plugin Capistrano::SCM::Git
 
 # Include tasks from other gems included in your Gemfile
 #
@@ -29,6 +29,7 @@ require 'capistrano/deploy'
 require 'capistrano/rails'
 require 'capistrano/rvm'
 require 'capistrano/puma'
+install_plugin Capistrano::Puma
 # require "capistrano/rbenv"
 # require "capistrano/chruby"
 require 'capistrano/bundler'
