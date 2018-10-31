@@ -17,12 +17,15 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
+  username: pguser
   password: admin
+  #username: postgres
+  #password: admin
   #host: ''
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   url: <%= ENV['DATABASE_URL'] %>
 
 # development:
@@ -35,12 +38,12 @@ default: &default
 #   port: 3306
 
 development:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
+  # adapter: postgresql
+  # encoding: unicode
   # username: pguser
   #password: IshnfwIml4
   # host: localhost
-  # <<: *default
   # database: roster_development
 
   # The specified database role being used to connect to postgres.
@@ -97,10 +100,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  # <<: *default
+  <<: *default
   database: roster_db
-  username: pguser
-  password: admin
+  #username: pguser
+  #password: admin
   #url: <%= ENV['DATABASE_URL'] %>
   host: localhost
   # password: <%= ENV['ROSTER_DATABASE_PASSWORD'] %>
