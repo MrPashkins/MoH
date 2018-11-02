@@ -3,8 +3,8 @@
 <p>Доброго дня <%= @user.name %>,</p>
 
 <p>
-Ласкаво просимо до Реєстру перших реагувальників. Перейдіть по посилання для підтвердження реєстрації:
+Ласкаво просимо до Реєстру перших реагувальників. Перейдіть по посилання для активації акаунту:
 </p>
 
-<%= link_to "Підтвердити", edit_account_activation_url(@user.activation_token,
+<%= link_to "Активувати", edit_account_activation_url(@user.activation_token,
                                                     email: @user.email) %>

@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'capistrano-passenger', require: false
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -69,6 +70,8 @@ group :test do
 end
 
 group :production do
+  gem 'passenger', require: false
+
   #gem 'pg', '>= 0.18', '< 2.0'
   #gem 'bootstrap-sass', '3.3.7'
   #gem 'jquery-rails', '4.3.1'

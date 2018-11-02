@@ -12,7 +12,9 @@ User.create!(name:  "Example User",
              phone_number: "+380 000 000 00 00",
              password:              "foobar",
              password_confirmation: "foobar",
-             admin: true)
+             admin: true,
+             activated: true,
+             activated_at: Time.zone.now)
 
 #require "faker"
 #I18n.reload!
@@ -32,5 +34,7 @@ User.create!(name:  "Example User",
                certificate: certificate,
                phone_number: phone_number,
                password:              password,
-               password_confirmation: password)
+               password_confirmation: password,
+               activated: true,
+               activated_at: Time.zone.now)
 end

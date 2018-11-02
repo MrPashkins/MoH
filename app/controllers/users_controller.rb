@@ -8,8 +8,8 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     #@users = User.all
-    #@users = User.where(activated: true).paginate(page: params[:page])
-    @users = User.paginate(page: params[:page])
+    @users = User.where(activated: true).paginate(page: params[:page])
+    #@users = User.paginate(page: params[:page])
   end
 
   # GET /users/1
@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        # UserMailer.account_activation(@user).deliver_now
         @user.send_activation_email
         flash[:info] = "Будь ласка перевірте email."
         redirect_to root_url

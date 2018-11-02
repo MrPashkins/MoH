@@ -21,7 +21,7 @@ default: &default
   password: admin
   #username: postgres
   #password: admin
-  #host: ''
+  #host: localhost
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   #pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -39,12 +39,13 @@ default: &default
 
 development:
   <<: *default
+  username: postgres
+  password: admin
   # adapter: postgresql
   # encoding: unicode
   # username: pguser
-  #password: IshnfwIml4
-  # host: localhost
-  # database: roster_development
+  host: localhost
+  database: roster_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
