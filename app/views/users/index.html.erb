@@ -7,11 +7,12 @@
 <table class="users">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>Дата народження</th>
       <th>Email</th>
-      <th>Phone Number</th>
-      <th>Inn</th>
-      <th>Certificate</th>
+      <th>Номер телефону</th>
+      <th>Сертифікати</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -20,9 +21,10 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.date_of_birth %></td>
         <td><%= user.email %></td>
         <td><%= user.phone_number %></td>
-        <td><%= user.inn %></td>
         <td><%= user.certificate %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>

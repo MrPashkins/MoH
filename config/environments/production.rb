@@ -68,15 +68,15 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   host = 'reestr.aem.org.ua'
   config.action_mailer.default_url_options = { host: host }
-  ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
-    :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'], #PashaShkurykhin
-    :password       => ENV['SENDGRID_PASSWORD'], #IshnfwIml4
-    :domain         => 'aem.org.ua',
-    :enable_starttls_auto => true
-  }
+  # ActionMailer::Base.smtp_settings = {
+  #   :address        => 'smtp.sendgrid.net',
+  #   :port           => '587',
+  #   :authentication => :plain,
+  #   :user_name      => ENV['SENDGRID_USERNAME'], #PashaShkurykhin
+  #   :password       => ENV['SENDGRID_PASSWORD'], #IshnfwIml4
+  #   :domain         => 'aem.org.ua',
+  #   :enable_starttls_auto => true
+  # }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

@@ -10,24 +10,29 @@ class User < ApplicationRecord
 # validation
 	before_save { self.email = email.downcase }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-	validates :name, presence: true, uniqueness: true, length: { maximum: 50 }
+	# VALID_DATE_REGEX = 
+	validates :name, presence: true, length: { maximum: 50 }
 	validates :email, presence: true, length: { maximum: 50 }, 
 			format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-	validates :inn, uniqueness: true, allow_nil: true
+	validates :date_of_birth, presence: true
 	validates :phone_number, presence: true, uniqueness: true
-	validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
-
+	validates :last_name, presence: true, length: { maximum: 50 }
+	
 	has_secure_password
 
+	validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
+
+	
+
 # Returns the hash digest of the given string.
-  def User.digest(string)
+  def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
                                                   BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
 # Returns a random token.
-  def User.new_token
+  def self.new_token
     SecureRandom.urlsafe_base64
   end
 
@@ -58,7 +63,8 @@ class User < ApplicationRecord
 
   # Sends activation email.
   def send_activation_email
-    UserMailer.account_activation(self).deliver_now
+    # UserMailer.account_activation(self).deliver_now
+    UserMailer.account_activation(self).deliver
   end
 
   # Sets the password reset attributes.
