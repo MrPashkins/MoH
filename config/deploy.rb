@@ -2,7 +2,7 @@
 server '94.131.241.58', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:MrPashkins/MoH.git'
-set :application,     'MoH'
+set :application,     'roster'
 set :user,            'pasha'
 set :rvm_ruby_version, '2.5.3'
 #set :puma_threads,    [4, 16]
@@ -22,7 +22,9 @@ set :passenger_restart_command, '/usr/local/rvm/gems/ruby-2.5.3/gems/passenger-5
 # set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 # set :puma_access_log, "#{release_path}/log/puma.access.log"
 # set :puma_error_log,  "#{release_path}/log/puma.error.log"
-set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.key) }
+set :bundle_path, nil
+set :bundle_flags, '--system --quiet'
 # set :puma_preload_app, true
 # set :puma_worker_timeout, nil
 # set :puma_init_active_record, true  # Change to false when not using ActiveRecord
@@ -35,11 +37,11 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+#set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 # set :linked_files, %w{config/master.key}
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
+#set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :passenger_restart_with_touch, false
 
@@ -67,14 +69,14 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart'
-      # , 'puma:start'
-      invoke 'deploy'
-    end
-  end
+  # desc 'Initial Deploy'
+  # task :initial do
+  #   on roles(:app) do
+  #     before 'deploy:restart'
+  #     # , 'puma:start'
+  #     invoke 'deploy'
+  #   end
+  # end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do

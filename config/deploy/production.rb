@@ -23,9 +23,9 @@
 # role :db,  %w{deploy@example.com}
 
 
-role :app, %w{pasha@94.131.241.58}
-role :web, %w{pasha@94.131.241.58}
-role :db,  %w{pasha@94.131.241.58}
+#role :app, %w{pasha@94.131.241.58}
+#role :web, %w{pasha@94.131.241.58}
+#role :db,  %w{pasha@94.131.241.58}
 
 # Configuration
 # =============
@@ -45,7 +45,7 @@ role :db,  %w{pasha@94.131.241.58}
 #
 # Global options
 # --------------
-set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa) }
+#set :ssh_options, { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa) }
 
 #  set :ssh_options, {
 #    keys: %w(/home/rlisowski/.ssh/id_rsa),
