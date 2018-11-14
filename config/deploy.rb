@@ -4,8 +4,9 @@ server '94.131.241.58', port: 22, roles: [:web, :app, :db], primary: true
 set :repo_url,        'git@github.com:MrPashkins/MoH.git'
 set :application,     'MoH'
 set :user,            'pasha'
-set :puma_threads,    [4, 16]
-set :puma_workers,    0
+set :rvm_ruby_version, '2.5.3'
+#set :puma_threads,    [4, 16]
+#set :puma_workers,    0
 # set :rvm_map_bins
 
 # Don't change these unless you know what you're doing
@@ -14,6 +15,8 @@ set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :passenger_environment_variables, { :path => '/usr/local/rvm/gems/ruby-2.5.3/gems/passenger-5.3.7/bin:$PATH' }
+set :passenger_restart_command, '/usr/local/rvm/gems/ruby-2.5.3/gems/passenger-5.3.7/bin/passenger-config restart-app'
 # set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 # set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
 # set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
@@ -32,9 +35,11 @@ set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh
 # set :keep_releases, 5
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/master.key}
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+# set :linked_files, %w{config/master.key}
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :passenger_restart_with_touch, false
 
@@ -68,6 +73,15 @@ namespace :deploy do
       before 'deploy:restart'
       # , 'puma:start'
       invoke 'deploy'
+    end
+  end
+
+  after :restart, :clear_cache do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
+      # Here we can do anything such as:
+      # within release_path do
+      #   execute :rake, 'cache:clear'
+      # end
     end
   end
 
