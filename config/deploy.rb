@@ -5,6 +5,7 @@ set :repo_url,        'git@github.com:MrPashkins/MoH.git'
 set :application,     'roster'
 set :user,            'pasha'
 set :rvm_ruby_version, '2.5.3'
+set :rvm_ruby_string, :local
 #set :puma_threads,    [4, 16]
 #set :puma_workers,    0
 # set :rvm_map_bins
@@ -38,7 +39,7 @@ set :bundle_flags, '--system --quiet'
 
 ## Linked Files & Directories (Default None):
 #set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
-# set :linked_files, %w{config/master.key}
+set :linked_files, %w{config/master.key}
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 #set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
